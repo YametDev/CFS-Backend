@@ -2,9 +2,7 @@ const DetailReview = require('../models/review_detail')
 
 module.exports.getAll = async (req, res) => {
   try {
-    const data = await DetailReview.find({})
-    
-    console.log("SQL Detail Data --------------------------->\n", data);
+    const data = await DetailReview.find({});
 
     const keyArr = {
       wait: 0,
@@ -43,16 +41,12 @@ module.exports.getAll = async (req, res) => {
       }
     });
 
-    console.log("Temp Result -------------------------------------->\n", result);
-
     result[0].data.forEach( ( element, index ) => {
       const sum = result[0].data[index] + result[1].data[index] + result[2].data[index];
       result[0].data[index] = result[0].data[index] * 100 / sum;
       result[1].data[index] = result[1].data[index] * 100 / sum;
       result[2].data[index] = result[2].data[index] * 100 / sum;
     })
-
-    console.log("Result -------------------------------------->\n", result);
 
     res.send({ result: true, data: result });
   } catch (err) {

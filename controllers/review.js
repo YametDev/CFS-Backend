@@ -19,8 +19,10 @@ module.exports.getAll = async (req, res) => {
 }
 
 module.exports.getRecent = async (req, res) => {
+  console.log("-----------------------------------------> Recent Reviews", req);
   try {
-    const data = await Review.find({}).limit(req.body);
+    const data = await Review.find({});
+    console.log(data);
     res.send({ result: true, data: data });
   } catch (err) {
     console.error(err)
