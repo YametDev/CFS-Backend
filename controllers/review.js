@@ -18,6 +18,16 @@ module.exports.getAll = async (req, res) => {
   }
 }
 
+module.exports.getRecent = async (req, res) => {
+  try {
+    const data = await Review.find({}).limit(req.body);
+    res.send({ result: true, data: data });
+  } catch (err) {
+    console.error(err)
+    res.send({ result: false })
+  }
+}
+
 module.exports.addOne = async (req, res) => {
   try {
     console.log("-------------------------------->\n", req.body, "\n-------------------------------->");
