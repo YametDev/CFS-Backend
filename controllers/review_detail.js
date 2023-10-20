@@ -1,4 +1,21 @@
+const nodemailer = require('nodemailer');
 const DetailReview = require('../models/review_detail')
+const template = require('./../template');
+
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'heliyamet3190@gmail.com',
+    pass: 'youaremyeverything'
+  }
+});
+
+let mailOptions = {
+  from: 'heliyamet3190@gmail.com',
+  to: 'heliyamet3190@gmail.com',
+  subject: 'New Review',
+  text: "Hello!"
+};
 
 module.exports.getAll = async (req, res) => {
   try {
@@ -60,16 +77,20 @@ module.exports.addOne = async (req, res) => {
     console.log("-------------------------------->\n", req.body, "\n-------------------------------->");
     const newReview = new DetailReview(req.body);
     newReview.save()
-    .then(savedRecord => {
-      res.send({
-        result: true
-      })
+    .then(() => {
+      transporter.sendMail(
+        mailOptions,
+        // {
+        //   ...mailOptions,
+        //   html: template.template(req.body)
+        // },
+        (error, info) => {
+        if (error) {
+          console.log('Error occurred while sending email:', error.message);
+        } else { console.log('Email sent successfully!\n', info); }
+      });
+      res.send({ result: true });
     })
-    .catch(error => {
-      throw error
-    })
-  } catch (err) {
-    console.error(err)
-    res.send({ result: false })
-  }
+    .catch(error => { throw error })
+  } catch (err) { res.send({ result: false }) }
 }
