@@ -7,7 +7,6 @@ const DetailReviewSchema = mongoose.Schema({
   },
   review_text: {
     type: String,
-    required: true
   }
 }, { timestamps: true });
 
