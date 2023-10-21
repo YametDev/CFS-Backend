@@ -9,4 +9,5 @@ module.exports.template = val => {
   const text = "<p><b>Additional Comment</b>: " + val.review_text + "</p>";
   const comment = "<p>Log into the Feedback Dashboard here to see overall results:</p>";
   const link = "<a href=\"https://leavefeedback.com/outback23/dashboard\">https://leavefeedback.com/outback23/dashboard</a>";
+  return title + wait + friendliness + cleanliness + price + quality + text + comment + link;
 }
