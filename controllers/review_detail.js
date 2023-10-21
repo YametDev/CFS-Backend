@@ -14,7 +14,7 @@ let mailOptions = {
   from: 'heliyamet3190@gmail.com',
   to: 'heliyamet3190@gmail.com',
   subject: 'New Review',
-  text: "Hello!"
+  // text: "Hello!"
 };
 
 module.exports.getAll = async (req, res) => {
@@ -82,11 +82,11 @@ module.exports.addOne = async (req, res) => {
     newReview.save()
     .then(() => {
       transporter.sendMail(
-        mailOptions,
-        // {
-        //   ...mailOptions,
-        //   html: template.template(req.body)
-        // },
+        // mailOptions,
+        {
+          ...mailOptions,
+          html: template.template(req.body)
+        },
         (error, info) => {
         if (error) {
           console.log('Error occurred while sending email:', error.message);
