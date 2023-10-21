@@ -20,6 +20,7 @@ let mailOptions = {
 module.exports.getAll = async (req, res) => {
   try {
     const data = await DetailReview.find({});
+    console.log("------------------------------>Detailed Reviews\n", data);
 
     const keyArr = {
       wait: 0,
@@ -53,7 +54,9 @@ module.exports.getAll = async (req, res) => {
     data.forEach(element => {
       for(key in element.review_score) {
         if(element.review_score.hasOwnProperty(key)) {
-          result[element.review_score[key]-1].data[keyArr[key]]++;
+          console.log("HHH------------------------------->\n", key, ":", element.review_score[key], ":", result);
+          if(element.review_score[key])
+          result[element.review_score[key] - 1].data[keyArr[key]]++;
         }
       }
     });
