@@ -4,9 +4,7 @@ const express = require('express')
 const usersRouter = require('./routes/users')
 const adminRouter = require('./routes/admin')
 const ErrorClass = require('./services/error')
-const commonRouter = require('./routes/common')
-const normalReviewRouter = require('./routes/review')
-const detailReviewRouter = require('./routes/review_detail')
+const reviewRouter = require('./routes/review')
 
 const app = express()
 
@@ -35,8 +33,7 @@ app.use((req, res, next) => {
 // app.use('/users', usersRouter)
 // app.use('/admin', adminRouter)
 // app.use('/common', commonRouter)
-app.use('/normal', normalReviewRouter)
-app.use('/detail', detailReviewRouter)
+app.use('/review', reviewRouter)
 
 // Define a route handler
 app.get('/', (req, res) => {

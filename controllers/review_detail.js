@@ -1,21 +1,4 @@
-const nodemailer = require('nodemailer');
 const DetailReview = require('../models/review_detail')
-const template = require('./../template');
-
-let transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'heliyamet3190@gmail.com',
-    pass: 'bdld hnxh sdmp shnu'
-  }
-});
-
-let mailOptions = {
-  from: 'heliyamet3190@gmail.com',
-  to: 'heliyamet3190@gmail.com',
-  subject: 'New Review',
-  // text: "Hello!"
-};
 
 module.exports.getAll = async (req, res) => {
   try {

@@ -7,6 +7,22 @@ const ReviewSchema = mongoose.Schema({
   },
   review: {
     type: String,
+  },
+  review_score: {
+    type: JSON,
+    require: true
+  },
+  review_text: {
+    type: String,
+  },
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+  },
+  company: {
+    type: String,
   }
 }, { timestamps: true })
 
