@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 const Review = require('../models/review')
+const Signup = require('../models/signup');
 const template = require('./../template');
 
 let transporter = nodemailer.createTransport({
@@ -19,13 +20,15 @@ let mailOptions = {
 module.exports.sendEmail = async reviewID => {
   
   const data = await Review.findById(reviewID);
+  const owner = await Signup.find({name: data.company});
   console.log("Send Email -------------------------------------> \n", reviewID);
 
   transporter.sendMail(
     // mailOptions,
     {
       ...mailOptions,
-      html: template.template(data)
+      html: template.template(data),
+      to: owner.email,
     },
     (error, info) => {
     if (error) {
