@@ -13,7 +13,7 @@ module.exports.login = async (req, res) => {
 }
 
 module.exports.exists = async (req, res) => {
-  Signup.findOne({name: req.body}, (err, val) => {
+  Signup.findOne({name: req.body.company}, (err, val) => {
     if(err) { res.send({result: false}) }
     else { res.send({result: val ? true : false}) }
   })
