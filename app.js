@@ -2,7 +2,6 @@
 const path = require('path')
 const express = require('express')
 const usersRouter = require('./routes/users')
-const adminRouter = require('./routes/admin')
 const ErrorClass = require('./services/error')
 const reviewRouter = require('./routes/review')
 
@@ -30,9 +29,7 @@ app.use((req, res, next) => {
   next()
 })
 
-// app.use('/users', usersRouter)
-// app.use('/admin', adminRouter)
-// app.use('/common', commonRouter)
+app.use('/user', usersRouter)
 app.use('/review', reviewRouter)
 
 // Define a route handler
