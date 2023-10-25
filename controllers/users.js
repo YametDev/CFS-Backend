@@ -12,6 +12,13 @@ module.exports.login = async (req, res) => {
   })
 }
 
+module.exports.exists = async (req, res) => {
+  Signup.findOne({name: req.body}, (err, val) => {
+    if(err) { res.send({result: false}) }
+    else { res.send({result: val ? true : false}) }
+  })
+}
+
 module.exports.signup = async (req, res) => {
   const {name, email, pass} = req.body;
   Signup.findOne({name: name}, (err, val) => {
