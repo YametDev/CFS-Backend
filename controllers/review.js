@@ -59,6 +59,7 @@ module.exports.modify = async (req, res) => {
     const updateFields = {
       name: req.body.name,
       email: req.body.email,
+      phone: req.body.phone,
     };
     Review.findOneAndUpdate({_id: req.body.id}, updateFields, { new: true })
       .then(updatedUser => {
