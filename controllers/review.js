@@ -18,7 +18,6 @@ let mailOptions = {
 };
 
 module.exports.sendEmail = async reviewID => {
-  
   const data = await Review.findById(reviewID);
   const owner = await Signup.find({name: data.company});
   console.log("Send Email -------------------------------------> \n", reviewID);
@@ -27,7 +26,7 @@ module.exports.sendEmail = async reviewID => {
     // mailOptions,
     {
       ...mailOptions,
-      html: template.template(data),
+      html: template.templateEmail(data),
       to: owner.email,
     },
     (error, info) => {
@@ -42,7 +41,7 @@ module.exports.addOne = async (req, res) => {
     const newReview = new Review(req.body);
     newReview.save()
     .then(savedRecord => {
-      setTimeout(this.sendEmail, 30000, savedRecord._id)
+      setTimeout(this.sendEmail, 1000, savedRecord._id)
       res.send({ result: true, data: savedRecord._id })
     })
     .catch(error => {
@@ -74,7 +73,14 @@ module.exports.modify = async (req, res) => {
     res.send({ result: false })
   }
 }
-
+module.exports.getAllData = async() => {
+  try {
+    const data = await Review.find({});
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
 module.exports.getAll = async (req, res) => {
   try {
     const data = await Review.find({company: req.body.company})
@@ -96,8 +102,10 @@ module.exports.getAll = async (req, res) => {
 module.exports.getRecent = async (req, res) => {
   try {
     const data = await Review.find({company: req.body.company});
-    console.log(data);
     res.send({ result: true, data: data.slice(0, req.body.count) });
+    // console.log("/---------------------------------------------")
+    // console.log(data.slice(0, req.body.count))
+    // console.log("/---------------------------------------------")
   } catch (err) {
     console.error(err)
     res.send({ result: false })
@@ -107,7 +115,7 @@ module.exports.getRecent = async (req, res) => {
 module.exports.getDetail = async (req, res) => {
   try {
     const data = await Review.find({company: req.body.company});
-    console.log("------------------------------>Detailed Reviews\n", data);
+    // console.log("------------------------------>Detailed Reviews\n", data);
 
     const keyArr = {
       wait: 0,
@@ -141,7 +149,7 @@ module.exports.getDetail = async (req, res) => {
     data.forEach(element => {
       for(key in element.review_score) {
         if(element.review_score.hasOwnProperty(key)) {
-          console.log("HHH------------------------------->\n", key, ":", element.review_score[key], ":", result);
+          // console.log("HHH------------------------------->\n", key, ":", element.review_score[key], ":", result);
           if(element.review_score[key])
           result[element.review_score[key] - 1].data[keyArr[key]]++;
         }

@@ -3,15 +3,12 @@ const mongoose = require('mongoose')
 const CompanySchema = mongoose.Schema({
   name: {
     type: String,
-    require: true
   },
   customer: {
     type: String,
-    require: true
   },
   dashboard: {
     type: String,
-    require: true
   },
   managers: {
     type: Array
@@ -30,7 +27,17 @@ const CompanySchema = mongoose.Schema({
   },
   street: {
     type: String,
-  }
+  },
+  alertEmail: {
+    type: Boolean,
+    default: false,
+    require: true,
+  },
+  alertSMS: {
+    type: Boolean,
+    default: false,
+    require: true
+  },
 }, { timestamps: true })
 
 const Company = mongoose.model('companies', CompanySchema)

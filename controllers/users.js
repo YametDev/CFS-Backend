@@ -6,7 +6,7 @@ module.exports.login = async (req, res) => {
     if(err) { res.send({result: false, data: err}) }
     else {
       if(!val) { res.send({result: false, data: "No user found"}) }
-      else if(pass == val.pass) { res.send({result: true, data: val.name}) }
+      else if(pass == val.pass) { res.send({result: true, data: val}) }
       else { res.send({result: false, data: "Wrong Password"}) }
     }
   })
