@@ -8,4 +8,5 @@ reviewRouter.post('/normal', reviewController.getAll)
 reviewRouter.post('/detail', reviewController.getDetail)
 reviewRouter.post('/recent', reviewController.getRecent)
 
+
 module.exports = reviewRouter

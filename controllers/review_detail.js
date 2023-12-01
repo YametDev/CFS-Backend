@@ -60,21 +60,21 @@ module.exports.getAll = async (req, res) => {
 
 module.exports.addOne = async (req, res) => {
   try {
-    console.log("-------------------------------->\n", req.body, "\n-------------------------------->");
+    // console.log("-------------------------------->\n", req.body, "\n-------------------------------->");
     const newReview = new DetailReview(req.body);
     newReview.save()
     .then(() => {
-      transporter.sendMail(
-        // mailOptions,
-        {
-          ...mailOptions,
-          html: template.template(req.body)
-        },
-        (error, info) => {
-        if (error) {
-          console.log('Error occurred while sending email:', error.message);
-        } else { console.log('Email sent successfully!\n', info); }
-      });
+      // transporter.sendMail(
+      //   // mailOptions,
+      //   {
+      //     ...mailOptions,
+      //     html: template.templateEmail(req.body)
+      //   },
+      //   (error, info) => {
+      //   if (error) {
+      //     console.log('Error occurred while sending email:', error.message);
+      //   } else { console.log('Email sent successfully!\n', info); }
+      // });
       res.send({ result: true });
     })
     .catch(error => { throw error })

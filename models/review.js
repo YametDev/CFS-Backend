@@ -22,7 +22,7 @@ const ReviewSchema = mongoose.Schema({
     type: String,
   },
   phone: {
-    type: Number,
+    type: String,
   },
   company: {
     type: String,
