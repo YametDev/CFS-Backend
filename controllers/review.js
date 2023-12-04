@@ -12,7 +12,7 @@ let transporter = nodemailer.createTransport({
   port: 587,
   auth: {
     user: 'heliyamet3190@gmail.com',
-    pass: 'everythingyoucanimagineisreal'
+    pass: 'wcxy rofe cmfh naqx'
   }
 });
 
