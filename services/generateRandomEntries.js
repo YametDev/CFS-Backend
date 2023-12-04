@@ -1,8 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { ACTIVITY, ROLE, LOCATION, BRANCHES } = require('../constants/constant')
 const Signup = require('../models/signup')
-const EventMeeting = require('../models/eventMeeting')
-const StartupSupport = require('../models/userStartupSupport')
 
 const branches = [
   'Parul University',
@@ -11,76 +9,6 @@ const branches = [
   'Rajkot Startup Studio',
   'Surat Startup Studio',
 ];
-
-async function usersStartup() {
-  const users = await Signup.find()
-  const dataEntries = []
-  for (let i = 0; i < users.length; i++) {
-    const name = users[i].firstName
-    const { email } = users[i]
-    const contact = users[i].phoneNumber
-    const location = branches[Math.floor(Math.random() * branches.length)]
-    const institute = 'Some Institute'
-    const otherInstitute = ''
-    const aadhar = Math.floor(Math.random() * 1000000000000).toString() // random 12-digit Aadhar number
-    const category = generateRandomString(10, 20)
-    const categoryOther = generateRandomString(10, 20)
-    const otherUniversity = generateRandomString(10, 20)
-    const otherOrganisation = generateRandomString(10, 20)
-    const designation = generateRandomString(10, 20)
-    const enrollmentNum = generateRandomString(10, 20)
-    const teamSize = randomNumberInRange(1, 5)
-    const teamMembers = `User ${Math.floor(
-      Math.random() * 100,
-    )}, User ${Math.floor(Math.random() * 100)}, User ${Math.floor(
-      Math.random() * 100,
-    )}`
-    const title = `Startup Title ${generateRandomString(10, 20)}`
-    const uniqueFeatures = 'Unique features of startup'
-    const currentStage =
-      'Prototype stage (If you have developed any working prototype of a solution proposed)'
-    const startupId =
-      location.substring(0, 2).toUpperCase() +
-      category.substring(0, 2).toUpperCase() +
-      title.substring(0, 2).toUpperCase() +
-      generateRandomNumber(6)
-    const status = 'pending'
-    const branch = BRANCHES[location]
-
-    const data = {
-      name,
-      email,
-      contact,
-      location,
-      institute,
-      otherInstitute,
-      aadhar,
-      category,
-      categoryOther,
-      otherUniversity,
-      otherOrganisation,
-      designation,
-      enrollmentNum,
-      teamSize,
-      teamMembers,
-      title,
-      uniqueFeatures,
-      currentStage,
-      startupId,
-      status,
-      branch,
-    }
-    if (users[i].role === ROLE.STUDENT) {
-      dataEntries.push(data)
-    }
-  }
-  try {
-    await StartupSupport.insertMany(dataEntries)
-    console.log('StartupSupport entries saved successfully')
-  } catch (error) {
-    console.error('Error while saving startupSupport entries:', error)
-  }
-}
 
 async function eventAndMeetings() {
   const entries = []
@@ -128,7 +56,6 @@ async function eventAndMeetings() {
 
   try {
     // Save the entries in bulk
-    await EventMeeting.insertMany(entries)
 
     console.log('EventMeeting entries saved successfully')
   } catch (error) {
@@ -195,5 +122,4 @@ function generateRandomNumber(length) {
 }
 module.exports = {
   eventAndMeetings,
-  usersStartup,
 }
