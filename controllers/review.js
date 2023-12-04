@@ -2,12 +2,14 @@ const nodemailer = require('nodemailer');
 const Review = require('../models/review')
 const Signup = require('../models/signup');
 const template = require('./../template');
+// const twilio = require('twilio');
+// require('dotenv').config();
 
 let transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'heliyamet3190@gmail.com',
-    pass: 'bdld hnxh sdmp shnu'
+    pass: 'everythingyoucanimagineisreal'
   }
 });
 
@@ -36,20 +38,32 @@ module.exports.sendEmail = async reviewID => {
   });
 }
 
+// module.exports.sendSMS = async reviewID => {
+//   const accountSid = process.env.TWILIO_ACCOUNT_SID; 
+//   const authToken = process.env.TWILIO_AUTH_TOKEN;
+//   const client = twillio(accountSid, authToken);
+//   client.messages.create({
+//     from: "+13606411310",
+//     to: "+12602553354",
+//     body: "Send SMS using Twilio Api in Node.js!"
+//   }).then((message) => console.log(message.sid));  
+// }
+
 module.exports.addOne = async (req, res) => {
   try {
     const newReview = new Review(req.body);
     newReview.save()
     .then(savedRecord => {
-      setTimeout(this.sendEmail, 1000, savedRecord._id)
-      res.send({ result: true, data: savedRecord._id })
+      console.log("Successed!");
+      setTimeout(this.sendSMS, 5000, savedRecord._id);
+      res.send({ result: true, data: savedRecord._id });
     })
     .catch(error => {
-      throw error
+      throw error;
     })
   } catch (err) {
-    console.error(err)
-    res.send({ result: false })
+    console.error(err);
+    res.send({ result: false });
   }
 }
 
@@ -62,23 +76,23 @@ module.exports.modify = async (req, res) => {
     };
     Review.findOneAndUpdate({_id: req.body.id}, updateFields, { new: true })
       .then(updatedUser => {
-        res.send({ result: true })
+        res.send({ result: true });
       })
       .catch(error => {
         console.log(error);
-        res.send({ result: false })
+        res.send({ result: false });
       });
   } catch (err) {
-    console.error(err)
-    res.send({ result: false })
+    console.error(err);
+    res.send({ result: false });
   }
 }
 module.exports.getAllData = async() => {
   try {
     const data = await Review.find({});
-    return data
+    return data;
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
 }
 module.exports.getAll = async (req, res) => {
@@ -94,8 +108,8 @@ module.exports.getAll = async (req, res) => {
 
     res.send({ result: true, data: result });
   } catch (err) {
-    console.error(err)
-    res.send({ result: false })
+    console.error(err);
+    res.send({ result: false });
   }
 }
 
@@ -107,8 +121,8 @@ module.exports.getRecent = async (req, res) => {
     // console.log(data.slice(0, req.body.count))
     // console.log("/---------------------------------------------")
   } catch (err) {
-    console.error(err)
-    res.send({ result: false })
+    console.error(err);
+    res.send({ result: false });
   }
 }
 

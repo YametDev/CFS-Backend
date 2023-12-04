@@ -35,6 +35,9 @@ module.exports.detail = async (req, res) => {
       customer: 'https://leavefeedback.org/' + req.body.company,
       dashboard: 'https://leavefeedback.org/' + req.body.company,
       logo: req.body.logo,
+      street: req.body.street,
+      alertSMS: req.body.alertSMS,
+      alertEmail: req.body.alertEmail,
     };
     Company.findOneAndUpdate({name: req.body.company}, updateFields, { upsert:true, new: true })
       .then(updatedDocument  => {
