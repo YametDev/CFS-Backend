@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const Review = require('../models/review')
 const Signup = require('../models/signup');
+const Company = require('../models/company');
 const template = require('./../template');
 // const twilio = require('twilio');
 // require('dotenv').config();
@@ -21,21 +22,26 @@ let mailOptions = {
 
 module.exports.sendEmail = async reviewID => {
   const data = await Review.findById(reviewID);
-  const owner = await Signup.find({name: data.company});
+  const company = await Company.find({name: data.company});
   console.log("Send Email -------------------------------------> \n", reviewID);
 
-  transporter.sendMail(
-    // mailOptions,
-    {
-      ...mailOptions,
-      html: template.templateEmail(data),
-      to: owner.email,
-    },
-    (error, info) => {
-    if (error) {
-      console.log('Error occurred while sending email:', error.message);
-    } else { console.log('Email sent successfully!\n', info); }
-  });
+  company.managers.map( val => {
+    if(val.email){
+      console.log("Sending Email To ", val.email);
+      transporter.sendMail(
+        {
+          ...mailOptions,
+          html: template.templateEmail(data),
+          to: val.email,
+        },
+        (error, info) => {
+          if (error) {
+            console.log('Error occurred while sending email:', error.message);
+          } else { console.log('Email sent successfully!\n', info); }
+        }
+      );
+    }
+  })
 }
 
 // module.exports.sendSMS = async reviewID => {
