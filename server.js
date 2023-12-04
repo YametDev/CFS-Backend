@@ -10,20 +10,20 @@ app.set('port', port)
 
 const server = http.createServer(app)
 const CompanyController = require('./controllers/company')
+
 async function startServer() {
   try {
     mongoose
       .connect(process.env.MONGODB_URL_LOCAL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false
+        useFindAndModify: false,
       })
       .then(() => {
         server.listen(port, () => {
           console.log(
             `Connected to local - Database for http server to port ${port}`,
           )
-          
         })
       })
       .catch((err) => {
@@ -36,6 +36,3 @@ async function startServer() {
 }
 
 startServer()
-
-
-

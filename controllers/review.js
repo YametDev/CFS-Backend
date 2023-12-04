@@ -107,6 +107,7 @@ module.exports.modify = async (req, res) => {
     res.send({ result: false })
   }
 }
+
 module.exports.getAllData = async () => {
   try {
     const data = await Review.find({})
@@ -115,6 +116,7 @@ module.exports.getAllData = async () => {
     console.log(err)
   }
 }
+
 module.exports.getAll = async (req, res) => {
   try {
     const data = await Review.find({ company: req.body.company })
