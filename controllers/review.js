@@ -60,8 +60,7 @@ module.exports.addOne = async (req, res) => {
     const newReview = new Review(req.body);
     newReview.save()
     .then(savedRecord => {
-      console.log("Successed!");
-      setTimeout(this.sendSMS, 5000, savedRecord._id);
+      setTimeout(this.sendEmail, 5000, savedRecord._id);
       res.send({ result: true, data: savedRecord._id });
     })
     .catch(error => {
