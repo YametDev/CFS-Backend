@@ -20,23 +20,6 @@ module.exports.generateRandomOTP = () => {
   return Math.floor(100000 + Math.random() * 900000)
 }
 
-module.exports.generateToken = (user, rememberMe = false) => {
-  return jwt.sign(
-    {
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      profession: user.profession,
-      phoneNumber: user.phoneNumber,
-    },
-    process.env.TOKEN_KEY,
-    {
-      expiresIn: rememberMe ? '7d' : '60m',
-    },
-  )
-}
-// function lke gen token,decypt password will be come in this utils file
-
 module.exports.validateDateFormat = (dateString, regex) => {
   return regex.test(dateString)
 }
