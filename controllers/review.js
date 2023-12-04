@@ -132,9 +132,6 @@ module.exports.getRecent = async (req, res) => {
   try {
     const data = await Review.find({company: req.body.company});
     res.send({ result: true, data: data.slice(0, req.body.count) });
-    // console.log("/---------------------------------------------")
-    // console.log(data.slice(0, req.body.count))
-    // console.log("/---------------------------------------------")
   } catch (err) {
     console.error(err);
     res.send({ result: false });
