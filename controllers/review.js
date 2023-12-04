@@ -51,13 +51,14 @@ module.exports.sendSMS = async reviewID => {
   const company = await Company.findOne({name: data.company});
   const accountSid = process.env.TWILIO_ACCOUNT_SID; 
   const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const twilioNumber = process.env.TWILIO_PHONE_NUMBER;
 
   company.managers.forEach( val => {
     if(val.phone) {
       console.log("Sending SMS To", val.phone);
       const client = twilio(accountSid, authToken);
       client.messages.create({
-        from: "+13606411310",
+        from: twilioNumber,
         to: "+12602553354",
         body: "Send SMS using Twilio Api in Node.js!"
       }).then((message) => console.log(message.sid)).catch(err => console.log(err));
