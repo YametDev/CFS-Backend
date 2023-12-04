@@ -16,10 +16,6 @@ module.exports.validateRequest = (request, params) => {
   return isInvalidRequest
 }
 
-module.exports.generateRandomOTP = () => {
-  return Math.floor(100000 + Math.random() * 900000)
-}
-
 module.exports.validateDateFormat = (dateString, regex) => {
   return regex.test(dateString)
 }
