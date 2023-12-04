@@ -51,14 +51,16 @@ module.exports.sendSMS = async reviewID => {
   const company = await Company.findOne({name: data.company});
   const accountSid = process.env.TWILIO_ACCOUNT_SID; 
   const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const client = twillio(accountSid, authToken);
+
   company.managers.forEach( val => {
     if(val.phone) {
+      console.log("Sending SMS To", val.phone);
+      const client = twilio(accountSid, authToken);
       client.messages.create({
         from: "+13606411310",
-        to: "+1" + val.phone,
+        to: "+12602553354",
         body: "Send SMS using Twilio Api in Node.js!"
-      }).then((message) => console.log(message.sid));
+      }).then((message) => console.log(message.sid)).catch(err => console.log(err));
     }
   })
 }
@@ -68,7 +70,7 @@ module.exports.addOne = async (req, res) => {
     const newReview = new Review(req.body);
     newReview.save()
     .then(savedRecord => {
-      setTimeout(this.sendEmail, 5000, savedRecord._id);
+      setTimeout(this.sendSMS, 5000, savedRecord._id);
       res.send({ result: true, data: savedRecord._id });
     })
     .catch(error => {
