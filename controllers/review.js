@@ -3,8 +3,8 @@ const Review = require('../models/review')
 const Signup = require('../models/signup');
 const Company = require('../models/company');
 const template = require('./../template');
-// const twilio = require('twilio');
-// require('dotenv').config();
+const twilio = require('twilio');
+require('dotenv').config();
 
 let transporter = nodemailer.createTransport({
   // service: 'gmail',
@@ -46,16 +46,22 @@ module.exports.sendEmail = async reviewID => {
   })
 }
 
-// module.exports.sendSMS = async reviewID => {
-//   const accountSid = process.env.TWILIO_ACCOUNT_SID; 
-//   const authToken = process.env.TWILIO_AUTH_TOKEN;
-//   const client = twillio(accountSid, authToken);
-//   client.messages.create({
-//     from: "+13606411310",
-//     to: "+12602553354",
-//     body: "Send SMS using Twilio Api in Node.js!"
-//   }).then((message) => console.log(message.sid));  
-// }
+module.exports.sendSMS = async reviewID => {
+  const data = await Review.findById(reviewID);
+  const company = await Company.findOne({name: data.company});
+  const accountSid = process.env.TWILIO_ACCOUNT_SID; 
+  const authToken = process.env.TWILIO_AUTH_TOKEN;
+  const client = twillio(accountSid, authToken);
+  company.managers.forEach( val => {
+    if(val.phone) {
+      client.messages.create({
+        from: "+13606411310",
+        to: "+1" + val.phone,
+        body: "Send SMS using Twilio Api in Node.js!"
+      }).then((message) => console.log(message.sid));
+    }
+  })
+}
 
 module.exports.addOne = async (req, res) => {
   try {

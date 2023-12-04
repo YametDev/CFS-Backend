@@ -16,7 +16,9 @@ module.exports.templateEmail = val => {
   const comment = "<p/><p>Log into the Feedback Dashboard here to see overall results:</p>";
   const link = "https://leavefeedback.com/" + val.company + "/dashboard";
   const linkstr = "<a href=\"" + link + "\">" + link + "</a>";
-  return firsttitle + rating + review + subtitle + wait + friendliness + cleanliness + price + quality + text + name + email + phone + comment + linkstr;
+  return firsttitle + rating + review
+    + ( val.rating==5 ? "" : subtitle + wait + friendliness + cleanliness + price + quality )
+    + text + name + email + phone + comment + linkstr;
 }
 
 module.exports.templateSMS = val => {
@@ -37,5 +39,7 @@ module.exports.templateSMS = val => {
   const comment = "Log into the Feedback Dashboard here to see overall results:";
   const link = "https://leavefeedback.com/" + val.company + "/dashboard";
   const linkstr = link;
-  return firsttitle + rating + review + subtitle + wait + friendliness + cleanliness + price + quality + text + name + email + phone + comment + linkstr;
+  return firsttitle + rating + review
+    + ( val.rating==5 ? "" : subtitle + wait + friendliness + cleanliness + price + quality )
+    + text + name + email + phone + comment + linkstr;
 }
