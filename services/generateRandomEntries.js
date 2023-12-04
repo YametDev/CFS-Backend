@@ -10,46 +10,7 @@ const branches = [
   'Ahmedabad Startup Studio',
   'Rajkot Startup Studio',
   'Surat Startup Studio',
-]
-async function signupUsers() {
-  const entries = []
-
-  // Generate 100 random entries
-  for (let i = 0; i < 100; i++) {
-    const firstName = generateRandomString(3, 20)
-    const lastName = generateRandomString(3, 20)
-    const email = `${generateRandomString(10, 20)}@example.com`
-    const phoneNumber = generateRandomNumberString(10)
-    const salt = bcrypt.genSaltSync(10)
-    const password = bcrypt.hashSync('Abc@1234567', salt)
-    const otpVerified = true
-    const isForgotPassword = false
-    const role = generateRandomRole()
-    const branch = generateRandomBranch()
-    const entry = {
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      password,
-      otpVerified,
-      isForgotPassword,
-      role,
-    }
-    if (role === ROLE.ADMIN) {
-      entry.branch = branch
-    }
-    entries.push(entry)
-  }
-
-  try {
-    // Save the entries in bulk
-    await Signup.insertMany(entries)
-    console.log('Signup entries saved successfully')
-  } catch (error) {
-    console.error('Error while saving signup entries:', error)
-  }
-}
+];
 
 async function usersStartup() {
   const users = await Signup.find()
@@ -233,7 +194,6 @@ function generateRandomNumber(length) {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 module.exports = {
-  signupUsers,
   eventAndMeetings,
   usersStartup,
 }
