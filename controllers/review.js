@@ -25,7 +25,6 @@ let mailOptions = {
 module.exports.sendEmail = async reviewID => {
   const data = await Review.findById(reviewID);
   const company = await Company.findOne({name: data.company});
-  // console.log("Send Email -------------------------------------> ", reviewID, "\n", company, company.managers);
 
   company.managers.forEach( val => {
     if(val.email){
@@ -60,7 +59,7 @@ module.exports.sendSMS = async reviewID => {
       client.messages.create({
         from: twilioNumber,
         to: "+12602553354",
-        body: "Send SMS using Twilio Api in Node.js!"
+        body: template.templateSMS(data)
       }).then((message) => console.log(message.sid)).catch(err => console.log(err));
     }
   })
