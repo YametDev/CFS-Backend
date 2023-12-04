@@ -1,4 +1,4 @@
-module.exports.templateEmail = val => {
+module.exports.templateEmail = ( val ) => {
   const firsttitle = '----------------------------------------------------------------';
   const rating = "<p>" + "★".repeat(val.rating) + "☆".repeat(5-val.rating) + "</p>";
   const review = "<p>\"" + val.review + "\"</p>";
