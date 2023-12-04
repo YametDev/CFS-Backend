@@ -1,6 +1,5 @@
 const nodemailer = require('nodemailer');
 const Review = require('../models/review')
-const Signup = require('../models/signup');
 const Company = require('../models/company');
 const template = require('./../template');
 const twilio = require('twilio');
@@ -141,7 +140,6 @@ module.exports.getRecent = async (req, res) => {
 module.exports.getDetail = async (req, res) => {
   try {
     const data = await Review.find({company: req.body.company});
-    // console.log("------------------------------>Detailed Reviews\n", data);
 
     const keyArr = {
       wait: 0,
@@ -175,7 +173,6 @@ module.exports.getDetail = async (req, res) => {
     data.forEach(element => {
       for(key in element.review_score) {
         if(element.review_score.hasOwnProperty(key)) {
-          // console.log("HHH------------------------------->\n", key, ":", element.review_score[key], ":", result);
           if(element.review_score[key])
           result[element.review_score[key] - 1].data[keyArr[key]]++;
         }
