@@ -1,33 +1,36 @@
 const mongoose = require('mongoose')
 
-const ReviewSchema = mongoose.Schema({
-  rating: {
-    type: Number,
-    require: true
+const ReviewSchema = mongoose.Schema(
+  {
+    rating: {
+      type: Number,
+      require: true,
+    },
+    review: {
+      type: String,
+    },
+    review_score: {
+      type: JSON,
+      require: true,
+    },
+    review_text: {
+      type: String,
+    },
+    name: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    company: {
+      type: String,
+    },
   },
-  review: {
-    type: String,
-  },
-  review_score: {
-    type: JSON,
-    require: true
-  },
-  review_text: {
-    type: String,
-  },
-  name: {
-    type: String,
-  },
-  email: {
-    type: String,
-  },
-  phone: {
-    type: String,
-  },
-  company: {
-    type: String,
-  }
-}, { timestamps: true })
+  { timestamps: true },
+)
 
 const Review = mongoose.model('reviews', ReviewSchema)
 
