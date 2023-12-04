@@ -22,10 +22,10 @@ let mailOptions = {
 
 module.exports.sendEmail = async reviewID => {
   const data = await Review.findById(reviewID);
-  const company = await Company.find({name: data.company});
-  console.log("Send Email -------------------------------------> \n", reviewID);
+  const company = await Company.findOne({name: data.company});
+  // console.log("Send Email -------------------------------------> ", reviewID, "\n", company, company.managers);
 
-  company.managers.map( val => {
+  company.managers.forEach( val => {
     if(val.email){
       console.log("Sending Email To ", val.email);
       transporter.sendMail(
