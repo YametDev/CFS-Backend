@@ -18,7 +18,7 @@ const SignupSchema = new mongoose.Schema(
     },
     isPaid: {
       type: Boolean,
-    }
+    },
   },
   {
     timestamps: true,
