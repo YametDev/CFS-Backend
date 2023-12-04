@@ -3,7 +3,6 @@ const DetailReview = require('../models/review_detail')
 module.exports.getAll = async (req, res) => {
   try {
     const data = await DetailReview.find({});
-    console.log("------------------------------>Detailed Reviews\n", data);
 
     const keyArr = {
       wait: 0,
