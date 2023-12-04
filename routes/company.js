@@ -5,7 +5,6 @@ const CompanyController = require('../controllers/company')
 let companyData;
 async function getMongoDB() {
   companyData = await CompanyController.getAllData();
-  console.log(companyData);
 }
 getMongoDB()
  
