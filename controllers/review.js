@@ -72,10 +72,22 @@ module.exports.sendSMS = async (reviewID) => {
 module.exports.addOne = async (req, res) => {
   try {
     const newReview = new Review(req.body)
+    const company = await Company.findOne({ name: newReview.company })
     newReview
       .save()
       .then((savedRecord) => {
-        setTimeout(this.sendSMS, 5000, savedRecord._id)
+        console.log(
+          'Email Alert : ',
+          company.alertEmail,
+          '\nSMS Alert : ',
+          company.alertSMS,
+        )
+        if (company.alertSMS) {
+          setTimeout(this.sendSMS, 300000, savedRecord._id)
+        }
+        if (company.alertEmail) {
+          setTimeout(this.sendEmail, 300000, savedRecord._id)
+        }
         res.send({ result: true, data: savedRecord._id })
       })
       .catch((error) => {
