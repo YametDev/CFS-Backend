@@ -18,7 +18,6 @@ const transporter = nodemailer.createTransport({
 const mailOptions = {
   from: 'notification@leavefeedback.org',
   to: 'heliyamet3190@gmail.com',
-  subject: 'New Review',
 }
 
 module.exports.sendEmail = async (reviewID) => {
@@ -33,6 +32,7 @@ module.exports.sendEmail = async (reviewID) => {
           ...mailOptions,
           html: template.templateEmail(data),
           to: val.email,
+          subject: data.company
         },
         (error, info) => {
           if (error) {
