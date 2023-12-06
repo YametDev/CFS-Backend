@@ -32,14 +32,11 @@ module.exports.sendEmail = async (reviewID) => {
           ...mailOptions,
           html: template.templateEmail(data),
           to: val.email,
-          subject: data.company
+          subject: data.company,
         },
-        (error, info) => {
-          if (error) {
+        (error) => {
+          if (error)
             console.log('Error occurred while sending email:', error.message)
-          } else {
-            console.log('Email sent successfully!\n', info)
-          }
         },
       )
     }
@@ -55,16 +52,19 @@ module.exports.sendSMS = async (reviewID) => {
 
   company.managers.forEach((val) => {
     if (val.phone) {
-      console.log('Sending SMS To', val.phone)
+      console.log('Sending SMS To ', val.phone)
       const client = twilio(accountSid, authToken)
-      client.messages
-        .create({
+      client.messages.create(
+        {
           from: twilioNumber,
           to: '+12602553354',
           body: template.templateSMS(data),
-        })
-        .then((message) => console.log(message.sid))
-        .catch((err) => console.log(err))
+        },
+        (error) => {
+          if (error)
+            console.log('Error occured while sending SMS:', error.message)
+        },
+      )
     }
   })
 }
