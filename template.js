@@ -24,7 +24,7 @@ module.exports.templateEmail = (val) => {
   const phone = val.phone?.length ? `<p/><p>${val.phone}</p>` : ''
   const comment =
     '<p/><p>Log into the Feedback Dashboard here to see overall results:</p>'
-  const link = `https://leavefeedback.com/${val.company}/dashboard`
+  const link = `https://leavefeedback.org/${val.company}/dashboard`
   const linkstr = `<a href="${link}">${link}</a>`
   return (
     firsttitle +
@@ -63,7 +63,7 @@ module.exports.templateSMS = (val) => {
   const phone = val.phone?.length ? `${val.phone}` : ''
   const comment =
     'Log into the Feedback Dashboard here to see overall results:\n'
-  const link = `https://leavefeedback.com/${val.company}/dashboard\n`
+  const link = `https://leavefeedback.org/${val.company}/dashboard\n`
   const linkstr = link
   return (
     firsttitle +
