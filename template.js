@@ -43,10 +43,7 @@ module.exports.templateEmail = (val) => {
 }
 
 module.exports.templateSMS = (val) => {
-  const firsttitle =
-    'New Review to ' +
-    val.company +
-    '\n----------------------------------------------------------------\n'
+  const firsttitle = `New Review to ${val.company}\n----------------------------------------------------------------\n`
   const rating = '★'.repeat(val.rating) + '☆'.repeat(5 - val.rating)
   const review = val.review ? `"${val.review}"\n` : '\n'
   const subtitle = 'Reactions to Service Parts:\n'
