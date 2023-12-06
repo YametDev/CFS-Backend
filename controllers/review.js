@@ -32,7 +32,7 @@ module.exports.sendEmail = async (reviewID) => {
           ...mailOptions,
           html: template.templateEmail(data),
           to: val.email,
-          subject: data.company,
+          subject: `Feedback for ${data.company}`,
         },
         (error) => {
           if (error)
@@ -126,6 +126,7 @@ module.exports.getAllData = async () => {
     return data
   } catch (err) {
     console.log(err)
+    return null
   }
 }
 
