@@ -57,7 +57,7 @@ module.exports.sendSMS = async (reviewID) => {
       client.messages.create(
         {
           from: twilioNumber,
-          to: '+12602553354',
+          to: val.phone,
           body: template.templateSMS(data),
         },
         (error) => {
