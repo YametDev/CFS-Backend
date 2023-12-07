@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
   auth: {
     user: 'noreply@leavefeedback.com',
     // pass: 'wcxy rofe cmfh naqx',
-    pass: 'Leavefeedback2024$',
+    pass: 'hxop wqhv gqdr uzwo',
   },
 })
 
