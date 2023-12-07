@@ -8,19 +8,11 @@ require('dotenv').config()
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'heliyamet3190@gmail.com',
-    pass: 'wcxy rofe cmfh naqx',
+    user: 'noreply@leavefeedback.com',
+    // pass: 'wcxy rofe cmfh naqx',
+    pass: 'Leavefeedback2024$',
   },
 })
-// const transporter = nodemailer.createTransport(
-//   'smtps://user%40gmail.com:pass@smtp.gmail.com',
-// )
-
-const mailOptions = {
-  // from: '"no-reply" <notification@leavefeedback.org>',
-  sender: '"no-reply" <no-reply@leavefeedback.org>',
-  to: 'heliyamet3190@gmail.com',
-}
 
 module.exports.sendEmail = async (reviewID) => {
   const data = await Review.findById(reviewID)
@@ -31,10 +23,9 @@ module.exports.sendEmail = async (reviewID) => {
       console.log('Sending Email To ', val.email)
       transporter.sendMail(
         {
-          ...mailOptions,
-          html: template.templateEmail(data),
           to: val.email,
           subject: `Feedback for ${data.company}`,
+          html: template.templateEmail(data),
         },
         (error) => {
           if (error)
