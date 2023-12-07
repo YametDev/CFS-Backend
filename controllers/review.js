@@ -5,13 +5,19 @@ const Company = require('../models/company')
 const template = require('../template')
 require('dotenv').config()
 
-const transporter = nodemailer.createTransport()
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'heliyamet3190@gmail.com',
+    pass: 'wcxy rofe cmfh naqx',
+  },
+})
 // const transporter = nodemailer.createTransport(
 //   'smtps://user%40gmail.com:pass@smtp.gmail.com',
 // )
 
 const mailOptions = {
-  from: '"no-reply" <notification@leavefeedback.org>',
+  // from: '"no-reply" <notification@leavefeedback.org>',
   sender: '"no-reply" <no-reply@leavefeedback.org>',
   to: 'heliyamet3190@gmail.com',
 }
@@ -82,7 +88,7 @@ module.exports.addOne = async (req, res) => {
           setTimeout(this.sendSMS, 300000, savedRecord._id)
         }
         if (company.alertEmail) {
-          setTimeout(this.sendEmail, 30000, savedRecord._id)
+          setTimeout(this.sendEmail, 300000, savedRecord._id)
         }
         res.send({ result: true, data: savedRecord._id })
       })
