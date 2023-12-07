@@ -5,22 +5,14 @@ const Company = require('../models/company')
 const template = require('../template')
 require('dotenv').config()
 
-const transporter = nodemailer.createTransport({
-  // service: 'gmail',
-  host: 'smtp.gmail.com',
-  port: 587,
-  auth: {
-    user: 'heliyamet3190@gmail.com',
-    pass: 'wcxy rofe cmfh naqx',
-  },
-})
+const transporter = nodemailer.createTransport()
 // const transporter = nodemailer.createTransport(
 //   'smtps://user%40gmail.com:pass@smtp.gmail.com',
 // )
 
 const mailOptions = {
-  from: 'notification@leavefeedback.org',
-  sender: 'no-reply@leavefeedback.org',
+  from: '"no-reply" <notification@leavefeedback.org>',
+  sender: '"no-reply" <no-reply@leavefeedback.org>',
   to: 'heliyamet3190@gmail.com',
 }
 
