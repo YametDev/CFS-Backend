@@ -20,7 +20,7 @@ module.exports.templateEmail = (val) => {
   } Quality of Products</p>`
 
   const contact =
-    val.name.length || val.email.length || val.phone.length
+    val.name.length * val.email.length * val.phone.length
       ? '<br/><p><b>Customer Contacts:</b></p>'
       : ''
   const name = val.name?.length ? `<p>${val.name}</p>` : ''
