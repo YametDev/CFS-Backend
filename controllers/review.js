@@ -88,7 +88,7 @@ module.exports.addOne = async (req, res) => {
           setTimeout(this.sendSMS, 300000, savedRecord._id)
         }
         if (company.alertEmail) {
-          setTimeout(this.sendEmail, 30000, savedRecord._id)
+          setTimeout(this.sendEmail, 300000, savedRecord._id)
         }
         res.send({ result: true, data: savedRecord._id })
       })
