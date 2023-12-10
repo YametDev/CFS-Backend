@@ -23,6 +23,7 @@ module.exports.sendEmail = async (reviewID) => {
       console.log('Sending Email To ', val.email)
       transporter.sendMail(
         {
+          from: '"LeaveFeedback" <noreply@leavefeedback.com>',
           to: val.email,
           subject: `Feedback for ${data.company}`,
           html: template.templateEmail(data),
