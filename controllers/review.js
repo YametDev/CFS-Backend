@@ -14,10 +14,7 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-module.exports.sendEmail = async (reviewID) => {
-  const data = await Review.findById(reviewID)
-  const company = await Company.findOne({ name: data.company })
-
+module.exports.sendEmail = async (data, company) => {
   company.managers.forEach((val) => {
     if (val.email) {
       console.log('Sending Email To ', val.email)
@@ -37,9 +34,7 @@ module.exports.sendEmail = async (reviewID) => {
   })
 }
 
-module.exports.sendSMS = async (reviewID) => {
-  const data = await Review.findById(reviewID)
-  const company = await Company.findOne({ name: data.company })
+module.exports.sendSMS = async (data, company) => {
   const accountSid = process.env.TWILIO_ACCOUNT_SID
   const authToken = process.env.TWILIO_AUTH_TOKEN
   const twilioNumber = process.env.TWILIO_PHONE_NUMBER
@@ -76,12 +71,8 @@ module.exports.addOne = async (req, res) => {
           '\nSMS Alert : ',
           company.alertSMS,
         )
-        if (company.alertSMS) {
-          setTimeout(this.sendSMS, 300000, savedRecord._id)
-        }
-        if (company.alertEmail) {
-          setTimeout(this.sendEmail, 300000, savedRecord._id)
-        }
+        this.sendSMS(newReview, company)
+        this.sendEmail(newReview, company)
         res.send({ result: true, data: savedRecord._id })
       })
       .catch((error) => {
