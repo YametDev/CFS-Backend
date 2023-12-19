@@ -1,5 +1,5 @@
 module.exports.templateEmail = (val) => {
-  const rating = `<p style="font-size: 18px;">${'★'.repeat(
+  const rating = `<p style="font-size: 30px;">${'★'.repeat(
     val.rating,
   )}${'☆'.repeat(5 - val.rating)}</p>`
   const review = val.review ? `<p>"${val.review}"</p>` : ''

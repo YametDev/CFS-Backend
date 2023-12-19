@@ -68,6 +68,8 @@ module.exports.addOne = async (req, res) => {
       .save()
       .then((savedRecord) => {
         console.log(
+          newReview.display,
+          company.display,
           'Email Alert : ',
           company.alertEmail,
           '\nSMS Alert : ',
