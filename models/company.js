@@ -5,6 +5,9 @@ const CompanySchema = mongoose.Schema(
     name: {
       type: String,
     },
+    display: {
+      type: String,
+    },
     customer: {
       type: String,
     },

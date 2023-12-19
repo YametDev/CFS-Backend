@@ -21,10 +21,11 @@ module.exports.exists = (req, res) => {
 
 module.exports.getAllData = async () => {
   try {
-    data = await Company.find({})
+    const data = await Company.find({})
     return data
   } catch (err) {
     console.log(err)
+    return []
   }
 }
 
@@ -32,6 +33,7 @@ module.exports.detail = async (req, res) => {
   try {
     const updateFields = {
       name: req.body.company,
+      display: req.body.display,
       button: req.body.button,
       star: req.body.star,
       managers: req.body.manager,

@@ -22,7 +22,9 @@ module.exports.sendEmail = async (data, company) => {
         {
           from: '"LeaveFeedback" <noreply@leavefeedback.com>',
           to: val.email,
-          subject: `Feedback for ${data.company}`,
+          subject: `Feedback for ${
+            data.display?.length ? data.display : data.company
+          }`,
           html: template.templateEmail(data),
         },
         (error) => {
@@ -71,8 +73,8 @@ module.exports.addOne = async (req, res) => {
           '\nSMS Alert : ',
           company.alertSMS,
         )
-        this.sendSMS(newReview, company)
-        this.sendEmail(newReview, company)
+        if (company.alertEmail) this.sendSMS(newReview, company)
+        if (company.alertSMS) this.sendEmail(newReview, company)
         res.send({ result: true, data: savedRecord._id })
       })
       .catch((error) => {
