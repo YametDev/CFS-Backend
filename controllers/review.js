@@ -15,8 +15,6 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports.sendEmail = async (data, company) => {
-  console.log("DATA ------------------------->\n", data)
-  console.log("COMPANY ------------------------->\n", company)
   company.managers.forEach((val) => {
     if (val.email) {
       console.log('Sending Email To ', val.email)
@@ -25,7 +23,7 @@ module.exports.sendEmail = async (data, company) => {
           from: '"LeaveFeedback" <noreply@leavefeedback.com>',
           to: val.email,
           subject: `Feedback for ${
-            data.display?.length ? data.display : data.company
+            company.display?.length ? company.display : company.name
           }`,
           html: template.templateEmail(data),
         },
