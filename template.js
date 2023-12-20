@@ -1,7 +1,7 @@
 module.exports.templateEmail = (val) => {
-  const rating = `<p style="font-size: 30px;">${'★'.repeat(
-    val.rating,
-  )}${'☆'.repeat(5 - val.rating)}</p>`
+  const rating = `<h1>${'★'.repeat(val.rating)}${'☆'.repeat(
+    5 - val.rating,
+  )}</h1>`
   const review = val.review ? `<p>"${val.review}"</p>` : ''
   const text = `<p><b>Comment:</b></p><p>${
     val.review_text.length ? val.review_text : 'None'
@@ -11,7 +11,7 @@ module.exports.templateEmail = (val) => {
   const faces = ['😐', '🙁', '😐', '🙂'].map(
     (val) => `<span style="font-size: 18px;">${val}</span>`,
   )
-  const wait = `<p>${faces[val.review_score.wait]} Wait Time</p>`
+  const wait = `<p><span style="font-size: 18px;">${faces[val.review_score.wait]}</span> Wait Time</p>`
   const friendliness = `<p>${
     faces[val.review_score.friendliness]
   } Staff Friendliness</p>`
@@ -27,11 +27,11 @@ module.exports.templateEmail = (val) => {
   const link = `https://leavefeedback.org/${val.company}/dashboard`
   const linkstr = `<a href="${link}">${link}</a>`
 
-  return `<div style="font-size: 18px";>${rating}${review}${text}${
+  return `${rating}${review}${text}${
     val.rating === 5
       ? ''
       : subtitle + wait + friendliness + cleanliness + price + quality
-  }${comment}${linkstr}</div>`
+  }${comment}${linkstr}`
 }
 
 module.exports.templateSMS = (val) => {

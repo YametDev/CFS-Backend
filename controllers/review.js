@@ -15,6 +15,8 @@ const transporter = nodemailer.createTransport({
 })
 
 module.exports.sendEmail = async (data, company) => {
+  console.log("DATA ------------------------->\n", data)
+  console.log("COMPANY ------------------------->\n", company)
   company.managers.forEach((val) => {
     if (val.email) {
       console.log('Sending Email To ', val.email)
