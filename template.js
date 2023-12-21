@@ -8,9 +8,7 @@ module.exports.templateEmail = (val) => {
   }</p>`
 
   const subtitle = '<br/><p><b>Reactions to Service Parts:</b></p>'
-  const faces = ['😐', '🙁', '😐', '🙂'].map(
-    (val) => `<span style="font-size: 18px;">${val}</span>`,
-  )
+  const faces = ['😐', '🙁', '😐', '🙂']
   const wait = `<p><span style="font-size: 18px;">${faces[val.review_score.wait]}</span> Wait Time</p>`
   const friendliness = `<p>${
     faces[val.review_score.friendliness]
