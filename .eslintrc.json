@@ -24,7 +24,7 @@
         "arrowParens": "always",
         "bracketSpacing": true,
         "max_line_length": 120,
-        "printWidth": 80,
+        "printWidth": 100,
         "endOfLine": "auto"
       }
     ],

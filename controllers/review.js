@@ -22,14 +22,11 @@ module.exports.sendEmail = async (data, company) => {
         {
           from: '"LeaveFeedback" <noreply@leavefeedback.com>',
           to: val.email,
-          subject: `Feedback for ${
-            company.display?.length ? company.display : company.name
-          }`,
+          subject: `Feedback for ${company.display?.length ? company.display : company.name}`,
           html: template.templateEmail(data),
         },
         (error) => {
-          if (error)
-            console.log('Error occurred while sending email:', error.message)
+          if (error) console.log('Error occurred while sending email:', error.message)
         },
       )
     }
@@ -52,8 +49,7 @@ module.exports.sendSMS = async (data, company) => {
           body: template.templateSMS(data),
         },
         (error) => {
-          if (error)
-            console.log('Error occured while sending SMS:', error.message)
+          if (error) console.log('Error occured while sending SMS:', error.message)
         },
       )
     }
@@ -185,15 +181,13 @@ module.exports.getDetail = async (req, res) => {
     data.forEach((element) => {
       for (key in element.review_score) {
         if (element.review_score.hasOwnProperty(key)) {
-          if (element.review_score[key])
-            result[element.review_score[key] - 1].data[keyArr[key]]++
+          if (element.review_score[key]) result[element.review_score[key] - 1].data[keyArr[key]]++
         }
       }
     })
 
     result[0].data.forEach((element, index) => {
-      const sum =
-        result[0].data[index] + result[1].data[index] + result[2].data[index]
+      const sum = result[0].data[index] + result[1].data[index] + result[2].data[index]
       result[0].data[index] = (result[0].data[index] * 100) / sum
       result[1].data[index] = (result[1].data[index] * 100) / sum
       result[2].data[index] = (result[2].data[index] * 100) / sum

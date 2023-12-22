@@ -5,16 +5,14 @@ const ErrorClass = require('./services/error')
 const usersRouter = require('./routes/users')
 const reviewRouter = require('./routes/review')
 const companyRouter = require('./routes/company')
+const stripeRouter = require('./routes/stripe')
 
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.use(
-  process.env.PUBLIC_PATH,
-  express.static(path.join(__dirname, process.env.PUBLIC_PATH)),
-)
+app.use(process.env.PUBLIC_PATH, express.static(path.join(__dirname, process.env.PUBLIC_PATH)))
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*')
@@ -23,16 +21,14 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Headers',
     'Origin,X-Requested-With,Content-Type,Accept,Authorization',
   )
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET,POST,PUT,DELETE,PATCH,OPTIONS',
-  )
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,PATCH,OPTIONS')
   next()
 })
 
 app.use('/user', usersRouter)
 app.use('/review', reviewRouter)
 app.use('/company', companyRouter)
+app.use('/stripe', stripeRouter)
 
 // Define a route handler
 app.get('/', (req, res) => {
