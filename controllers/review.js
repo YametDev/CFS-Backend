@@ -46,7 +46,10 @@ module.exports.sendSMS = async (data, company) => {
         {
           from: twilioNumber,
           to: val.phone,
-          body: template.templateSMS(data),
+          body: template.templateSMS(
+            data,
+            company.display?.length ? company.display : company.name,
+          ),
         },
         (error) => {
           if (error) console.log('Error occured while sending SMS:', error.message)

@@ -22,8 +22,8 @@ module.exports.templateEmail = (val) => {
   }${comment}${linkstr}`
 }
 
-module.exports.templateSMS = (val) => {
-  const rating = '★'.repeat(val.rating) + '☆'.repeat(5 - val.rating)
+module.exports.templateSMS = (val, name) => {
+  const rating = `${'★'.repeat(val.rating) + '☆'.repeat(5 - val.rating)}  ${name}`
   const review = val.review ? `"${val.review}"\n` : '\n'
   const text = `Comment: ${val.review_text.length ? val.review_text : 'None'}\n`
   const link = `https://leavefeedback.org/${val.company}/dashboard\n`

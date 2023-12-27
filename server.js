@@ -21,9 +21,7 @@ async function startServer() {
       })
       .then(() => {
         server.listen(port, () => {
-          console.log(
-            `Connected to local - Database for http server to port ${port}`,
-          )
+          console.log(`Connected to local - Database for http server to port ${port}`)
         })
       })
       .catch((err) => {
