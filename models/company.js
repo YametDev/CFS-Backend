@@ -42,6 +42,15 @@ const CompanySchema = mongoose.Schema(
       default: false,
       require: true,
     },
+    menu: {
+      type: Array,
+      default: [
+        {visible: true, url: "/menu", title: "See Menu"},
+        {visible: true, url: "/deals", title: "Get Deals"},
+        {visible: true, url: "/games", title: "Play Games"},
+        {visible: true, url: "/jobs", title: "We're Hiring!"},
+      ]
+    }
   },
   { timestamps: true },
 )

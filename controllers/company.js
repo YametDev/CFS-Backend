@@ -31,20 +31,15 @@ module.exports.getAllData = async () => {
 
 module.exports.detail = async (req, res) => {
   try {
-    const updateFields = {
-      name: req.body.company,
-      display: req.body.display,
-      button: req.body.button,
-      star: req.body.star,
-      managers: req.body.manager,
-      google: req.body.googleId,
-      customer: `https://leavefeedback.org/${req.body.company}`,
-      dashboard: `https://leavefeedback.org/${req.body.company}`,
-      logo: req.body.logo,
-      street: req.body.street,
-      alertSMS: req.body.alertSMS,
-      alertEmail: req.body.alertEmail,
-    }
+    let updateFields = {};
+    Object.keys(req.body).forEach(key => {
+      if(key !== "company"){
+        updateFields = {
+          ...updateFields,
+          [key]: req.body[key]
+        }
+      }
+    })
     Company.findOneAndUpdate({ name: req.body.company }, updateFields, {
       upsert: true,
       new: true,
